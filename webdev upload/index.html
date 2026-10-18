@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalendAr</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- Chart for graphs (FR6 & FR7 visual feedback) -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+
+<body>
+
+
+    <header class="mainHeader">
+        <h1>University Study Planner</h1>
+    </header>
+    <!--nav between sections -->
+    <nav class="navigation">
+        <ul class="sidebar-list">
+            <li><a href="#calendar">Calendar</a></li>
+            <li><a href="#add-task-form">Add Task</a></li>
+            <li><a href="#upcomingTaskk">Upcoming</a></li>
+            <li><a href="#overdueSection">Overdue</a></li>
+            <li><a href="#grades">Grades</a></li>
+            <li><a href="#feedback">Graph</a></li>
+
+            <li><a href="#timer">Timer</a></li>
+        </ul>
+    </nav>
+    <!--Json -->
+    <div class="page-container">
+        <section class="upload-section">
+            <h2>Upload assessment JSON</h2>
+            <input type="file" id="fileInput" accept=".json">
+        </section>
+
+        <div class="layout">
+            <!--sidebar for notification fr4&fr5 -->
+            <aside class="sidebar">
+                <p>Notifications:</p>
+                <div id="SidebarNotification"></div>
+
+            </aside>
+
+            <div class="page-container">
+
+                <main class="main-content">
+
+                    <section id="calendar" class="calendar">
+
+                        <div class="headerCalendar">
+                            <!--F1: calandar diplay-->
+                            <button id="prevMonth" class="buttonPrev">◀</button>
+                            <h2 id="monthYear"></h2>
+                            <button id="nextMonth" class="buttonNext">▶</button>
+                        </div>
+
+                        <div class="calendar-grid-wrapper">
+                            <div class="days">
+
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                                <div>Sun</div>
+                            </div>
+                            <div id="dates" class="dates"></div>
+                        </div>
+                    </section>
+                    <div class="calendar-legend">
+                           <!-- symbols -->
+                        <div class="legend-box">
+                            <span class="legend-symbol due-symbol">⏳</span>
+                            <span>Due</span>
+                        </div>
+                     
+                        <div class="legend-box">
+                            <span class="legend-symbol overdue-symbol">⚠️</span>
+                            <span>Overdue</span>
+                        </div>
+
+                        <div class="legend-box">
+                            <span class="legend-symbol complete-symbol">✔️</span>
+                            <span>Complete</span>
+                        </div>
+                    </div>
+                    <!--F2 add revision task-->
+                    <section id="add-task-form" class="add-task-form">
+                        <h1>Add a new task</h1>
+                        <form class="advanced-form" novalidate>
+
+                            <div class="form-group">
+                                <label for="description">Task Description</label>
+                                <input type="text" id="description" name="description" required>
+                                <span class="error-message" id="description-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="resource">Resource Link (Optional)</label>
+                                <input type="url" id="resource" name="resource">
+                                <span class="error-message" id="resource-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dueDate">Due Date</label>
+                                <input type="date" id="dueDate" name="dueDate" required>
+                                <span class="error-message" id="dueDate-error"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="completion-date">Completion Date</label>
+                                <input type="date" id="completion-date" name="completiondate">
+                                <span class="error-message" id="completion-date-error"></span>
+                            </div>
+
+                            <div>
+                                <button type="submit" id="submit" class="buttonTask">Save Task</button>
+                            </div>
+                        </form>
+
+                    </section>
+
+                    <h2>All Task</h2>
+
+                    <div id="items"></div>
+
+                    <button id="clearCompleted">Clear Completed Tasks</button>
+                    <!-- fr5-->
+                    <section id="upcomingTaskk" class="upcomingTask">
+                        <h1>Upcoming in 30 days</h1>
+
+                        <div id="upcoming"></div>
+                    </section>
+                    <!-- fr4-->
+                    <section id="overdueSection" class="overdue">
+                        <h1>Overdue task</h1>
+                        <div id="overdue"></div>
+                    </section>
+
+                    <!-- grade goal-->
+
+                    <section id="grades" class="grades">
+                        <div class="form-group">
+                            <label for="gradeGoal">Choose your target final grade</label>
+                            <select id="gradeGoal">
+                                <option value="40">3rd Third class (40-49%)</option>
+                                <option value="50">2:2 Lower Second Class (50-59%)</option>
+                                <option value="60">2:1 Upper Second Class (60-69%)</option>
+                                <option value="70">1st First class (70+)</option>
+                            </select>
+                            <div id="goal-feedback"></div>
+                        </div>
+                    </section>
+                    <!--grade input slider -->
+                    <section id="actualgrades" class="actualgrades">
+                        <div id="actualgrades-container"></div>
+                    </section>
+                    <!--visual -->
+                    <section id="feedback" class="feedback">
+                        <h2>Bar Chart</h2>
+                        <canvas id="barChart"></canvas>
+                    </section>
+
+                    <section id="linechart-section" class="feedback">
+                        <h2>Module Averages</h2>
+                        <canvas id="lineChart"></canvas>
+                    </section>
+                    <!--study timerr -->
+                    <section id="timer" class="Timer">
+                        <label for="focusTime">Focus timer</label>
+
+                        <div id="timerDisplay">00:00</div>
+                        <select id="focusTime">
+                            <option value="15">15 min</option>
+                            <option value="20">20 min</option>
+                            <option value="25">25 min</option>
+                            <option value="30">30 min</option>
+                            <option value="35">35 min</option>
+                            <option value="40">40 min</option>
+                        </select>
+
+
+                        <button id="startTimerBtn" type="button">Start</button>
+                        <button id="pauseTimerBtn" type="button">Pause</button>
+                        <button id="stopTimerBtn" type="button">Stop</button>
+
+                        <audio id="alarmSound" preload="auto">
+                            <source src="sound/mixkit-warning-alarm-buzzer-991.wav" type="audio/wav">
+                        </audio>
+
+                    </section>
+
+
+                </main>
+            </div>
+
+            <dialog id="calendarDayView">
+
+                <h3>Tasks this day</h3>
+                <div id="dayItems"></div>
+                <button onclick="closeDialog()">Close</button>
+            </dialog>
+
+
+        </div>
+        <script src="scripts/script.js"></script>
+
+        <footer>
+            Study Planner
+        </footer>
+
+
+</body>
+
+</html>

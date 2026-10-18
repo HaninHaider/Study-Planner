@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "type": "coursework",
+        "module": "4322COMP: Web Development I",
+        "assessmentName": "Building an Interactive Site",
+        "deadline": "2026-04-24",
+        "weighting": 1.0
+    },
+    {
+        "id": 2,
+        "type": "coursework",
+        "module": "4321COMP: SE Workshop",
+        "assessmentName": "Group Project",
+        "deadline": "2026-04-17",
+        "weighting": 1.0
+    },
+    {
+        "id": 3,
+        "type": "coursework",
+        "module": "4301COMP: Computer Systems",
+        "assessmentName": "Computer Systems Report",
+        "deadline": "2026-04-17",
+        "weighting": 0.5
+    },
+    {
+        "id": 4,
+        "type": "exam",
+        "module": "4301COMP: Computer Systems",
+        "assessmentName": "Computer Systems Final Exam",
+        "deadline": "2026-05-04",
+        "weighting": 0.5
+    },
+    {
+        "id": 5,
+        "type": "coursework",
+        "module": "4304COMP: Data Modelling",
+        "assessmentName": "Portfolio of Data Modelling",
+        "deadline": "2026-04-13",
+        "weighting": 1.0
+    },
+    {
+        "id": 6,
+        "type": "exam",
+        "module": "4300COMP: Introduction to Programming",
+        "assessmentName": "In-class Test",
+        "deadline": "2026-03-12",
+        "weighting": 0.3
+    },
+    {
+        "id": 7,
+        "type": "coursework",
+        "module": "4300COMP: Introduction to Programming",
+        "assessmentName": "Cottage Booking System",
+        "deadline": "2026-04-28",
+        "weighting": 0.7
+    }
+]
